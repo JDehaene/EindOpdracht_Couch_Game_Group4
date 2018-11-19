@@ -13,11 +13,13 @@ public class CameraController : MonoBehaviour {
     private Vector3 _cameraMovingVelocity = Vector3.zero;
 
 
-    void LateUpdate() {
+    void LateUpdate()
+    {
         SmoothFollowTarget();        
     }
 
-    private void SmoothFollowTarget() {
+    private void SmoothFollowTarget()
+    {
         Vector3 targetPositionWithOffset = Target.position + new Vector3(HorizontalOffset, 0f, VerticalOffset);
         this.transform.position = Vector3.SmoothDamp(this.transform.position, targetPositionWithOffset, ref _cameraMovingVelocity, SmoothingSpeed);
     }
