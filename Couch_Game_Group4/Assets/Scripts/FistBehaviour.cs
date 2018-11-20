@@ -25,17 +25,16 @@ public class FistBehaviour : MonoBehaviour {
     //Move variables
     [SerializeField]
     private float _moveSpeed;
-
+    private float _speedIncrease = 0.5f;
+   
 
     void Update ()
     {
-        Debug.Log(_smashingLeft);
+        Debug.Log(_speedIncrease);
         HandleInput();
         MoveBoss();
         LeftFist();
         RightFist();
-        
-
     }
     void LeftFist()
     {
@@ -70,10 +69,18 @@ public class FistBehaviour : MonoBehaviour {
     //Left Fist Methods
     void leftFistMovement()
     {
-        if (_leftVertInput < 0) //Prevent from going up        
-            _leftFist.position += new Vector3(_leftHorizInput / 10, _leftVertInput, 0); //Vertical movement       
+        float _speedIncrement = 10 * Time.deltaTime;
+        if (_leftVertInput < 0) //Prevent from going up   
+        {
+            _speedIncrease -= _speedIncrement;
+            _leftFist.position += new Vector3(0, _leftVertInput + _speedIncrease, 0); //Vertical movement       
+        }
         else
-            _leftFist.position += new Vector3(_leftHorizInput, 0, 0); //Horizontal movement
+        {
+            _speedIncrease = 0.5f;
+            _leftFist.position += new Vector3(_leftHorizInput/2, 0, 0); //Horizontal movement
+        }
+        
 
         _smashingLeft = false;
     }  
