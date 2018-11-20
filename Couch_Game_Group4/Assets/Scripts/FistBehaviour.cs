@@ -2,10 +2,11 @@
 
 public class FistBehaviour : MonoBehaviour {
 
-    private float _leftVertInput, _leftHorizInput, _rightVertInput, _rightHorizInput;
+    private float  _rightVertInput, _rightHorizInput;
+    private float _leftHorizInput,_leftVertInput;
     [SerializeField]
-    private GameObject _leftFist,_rightFist,_fistConstraint;
-
+    private Transform _leftFist,_rightFist,_fistConstraint;
+    private bool _smashingLeft;
 
     //Left fist variables
     private bool _canSlamLeftFist;
@@ -21,15 +22,19 @@ public class FistBehaviour : MonoBehaviour {
     private GameObject _returnRightFist;
     private float _rightFistCooldown;
 
+    //Move variables
+    [SerializeField]
+    private float _moveSpeed;
+
 
     void Update ()
     {
+        Debug.Log(_smashingLeft);
         HandleInput();
-        Debug.Log(_rightHorizInput);
-
+        MoveBoss();
         LeftFist();
         RightFist();
-
+        
 
     }
     void LeftFist()
@@ -38,12 +43,10 @@ public class FistBehaviour : MonoBehaviour {
         ReturnLeftFist();
         if (_canSlamLeftFist)
         {
-            SlamLeftFist();
+            leftFistMovement();
+            FasterGravity();
         }
-        if (_canMoveLeftFist)
-        {
-            MoveLeftFist();
-        }
+
     }
     void RightFist()
     {
@@ -51,31 +54,29 @@ public class FistBehaviour : MonoBehaviour {
         ReturnRightFist();
         if (_canSlamRightFist)
         {
-            SlamRightFist();
+            RightFistMovement();
         }
-        if (_canMoveRightFist)
-        {           
-            MoveRightFist();
-        }
+
     }
     void HandleInput()
     {
-        _leftHorizInput = Input.GetAxis("Horizontal");
+        _leftHorizInput = Input.GetAxis("Horizontal");           
         _leftVertInput = Input.GetAxis("Vertical");
-
+      
         _rightHorizInput = Input.GetAxis("MouseX");
         _rightVertInput = Input.GetAxis("MouseY");
     }
 
     //Left Fist Methods
-    void SlamLeftFist()
+    void leftFistMovement()
     {
-        _leftFist.transform.position +=  new Vector3(0,_leftVertInput,0);        
-    }
-    void MoveLeftFist()
-    {
-        _leftFist.transform.position +=  new Vector3(_leftHorizInput, 0, 0);
-    }
+        if (_leftVertInput < 0) //Prevent from going up        
+            _leftFist.position += new Vector3(_leftHorizInput / 10, _leftVertInput, 0); //Vertical movement       
+        else
+            _leftFist.position += new Vector3(_leftHorizInput, 0, 0); //Horizontal movement
+
+        _smashingLeft = false;
+    }  
     void CheckLeftFistLocation()
     {
         if (_leftFist.transform.position.y < _fistConstraint.transform.position.y)
@@ -101,14 +102,13 @@ public class FistBehaviour : MonoBehaviour {
     }
 
     //Right Fist Methods
-    
-    void SlamRightFist()
+
+    void RightFistMovement()
     {
-        _rightFist.transform.position += new Vector3(0, _rightVertInput, 0);
-    }
-    void MoveRightFist()
-    {
-        _rightFist.transform.position += new Vector3(_rightHorizInput, 0, 0);
+        if (_rightVertInput < 0)
+            _rightFist.position += new Vector3(_rightHorizInput/10, _rightVertInput, 0);
+        else
+            _rightFist.position += new Vector3(_rightHorizInput, 0, 0);
     }
     void CheckRightFistLocation()
     {
@@ -132,5 +132,17 @@ public class FistBehaviour : MonoBehaviour {
                 _canMoveRightFist = true;
             }
         }
+    }
+
+    //Move method
+    void MoveBoss()
+    {
+        this.transform.position += new Vector3(_moveSpeed * Time.deltaTime, 0, 0);
+    }
+    //Interesting movement
+
+    void FasterGravity()
+    {
+        //to be continued
     }
 }

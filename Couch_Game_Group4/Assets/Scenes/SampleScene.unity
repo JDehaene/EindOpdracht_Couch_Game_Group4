@@ -309,10 +309,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 30
+  far clip plane: 40
   field of view: 60
   orthographic: 1
-  orthographic size: 10.036161
+  orthographic size: 15.440872
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -335,7 +335,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.04, z: -0.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1661698858}
@@ -368,11 +368,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911deb06d7b0e694e8b582470be443d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftFist: {fileID: 2094115533}
-  _rightFist: {fileID: 1857167838}
-  _fistConstraint: {fileID: 1701296545}
+  _leftFist: {fileID: 2094115537}
+  _rightFist: {fileID: 1857167842}
+  _fistConstraint: {fileID: 1701296546}
   _returnLeftFist: {fileID: 1851063897}
   _returnRightFist: {fileID: 1521827373}
+  _moveSpeed: 0
 --- !u!4 &915598819
 Transform:
   m_ObjectHideFlags: 0
@@ -380,7 +381,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 915598817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.961141, y: 5.28, z: 11.554893}
+  m_LocalPosition: {x: 11.961141, y: 12.9, z: 11.554893}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1851063898}
@@ -389,9 +390,51 @@ Transform:
   - {fileID: 1862867408}
   - {fileID: 2094115537}
   - {fileID: 1857167842}
+  - {fileID: 1515320434}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1515320433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515320434}
+  - component: {fileID: 1515320435}
+  m_Layer: 0
+  m_Name: Midwaycollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1515320434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1515320433}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.28, y: 9.29, z: 5.379199}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 915598819}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1515320435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1515320433}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.59, y: 4.64, z: 13.597689}
+  m_Center: {x: 0, y: 0, z: -6.2988443}
 --- !u!1 &1521827373
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,21 +493,22 @@ MonoBehaviour:
   Target: {fileID: 915598819}
   SmoothingSpeed: 0.4
   HorizontalOffset: -13
-  VerticalOffset: -10.97
+  VerticalOffset: 0
+  Distance: -30
 --- !u!4 &1661698858
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1661698856}
-  m_LocalRotation: {x: 0.052342832, y: -0, z: -0, w: 0.9986292}
+  m_LocalRotation: {x: 0.03489949, y: 0, z: 0, w: 0.99939084}
   m_LocalPosition: {x: 0, y: 10.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 534669905}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 4, y: 0, z: 0}
 --- !u!1 &1701296545
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +531,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1701296545}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.97, y: -1.47, z: -3.6800003}
+  m_LocalPosition: {x: -16.97, y: -9.6, z: -3.6800003}
   m_LocalScale: {x: 4.8316298, y: 5.04812, z: 4.9140596}
   m_Children: []
   m_Father: {fileID: 915598819}
