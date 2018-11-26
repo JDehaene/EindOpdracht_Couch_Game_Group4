@@ -29,10 +29,9 @@ public class FistBehaviour : MonoBehaviour {
 
     //Camera variable
     private bool _shakeLeft,_shakeRight;
+
     [SerializeField]
-    private float _shakeDuration;
-    [SerializeField]
-    private float _shakeMagnitude;
+    private float _shakeDuration,_shakeMagnitude;
     public ShakeBehaviour CameraShake;
    
 
