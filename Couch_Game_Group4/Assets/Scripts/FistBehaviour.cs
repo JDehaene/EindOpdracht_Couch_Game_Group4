@@ -5,8 +5,8 @@ public class FistBehaviour : MonoBehaviour {
     private float  _rightVertInput, _rightHorizInput;
     private float _leftHorizInput,_leftVertInput;
     [SerializeField]
-    private Transform _leftFist,_rightFist,_fistConstraint;
-    private bool _smashingLeft;
+    private Transform _leftFist, _rightFist;
+    public Transform _fistConstraint;
 
     //Left fist variables
     private bool _canSlamLeftFist;
@@ -25,17 +25,27 @@ public class FistBehaviour : MonoBehaviour {
     //Move variables
     [SerializeField]
     private float _moveSpeed;
+    private float _speedIncreaseLeft = 0.5f;
+    private float _speedIncreaseRight = 0.5f;
 
+    //Camera variable
+    private bool _shake;
+
+    [SerializeField]
+    private float _shakeDuration,_shakeMagnitude;
+    public ShakeBehaviour CameraShake;
+   
 
     void Update ()
     {
-        Debug.Log(_smashingLeft);
         HandleInput();
         MoveBoss();
         LeftFist();
         RightFist();
-        
 
+        //ShakeCamera independent of fist
+        if (_shake)
+            ShakeCamera();
     }
     void LeftFist()
     {
@@ -43,8 +53,7 @@ public class FistBehaviour : MonoBehaviour {
         ReturnLeftFist();
         if (_canSlamLeftFist)
         {
-            leftFistMovement();
-            FasterGravity();
+            leftFistMovement();           
         }
 
     }
@@ -60,22 +69,27 @@ public class FistBehaviour : MonoBehaviour {
     }
     void HandleInput()
     {
-        _leftHorizInput = Input.GetAxis("Horizontal");           
-        _leftVertInput = Input.GetAxis("Vertical");
+        _leftHorizInput = Input.GetAxis("LeftHorizontalP1");           
+        _leftVertInput = Input.GetAxis("LeftVerticalP1");
       
-        _rightHorizInput = Input.GetAxis("MouseX");
-        _rightVertInput = Input.GetAxis("MouseY");
+        _rightHorizInput = Input.GetAxis("RightHorizontalP1");
+        _rightVertInput = Input.GetAxis("RightVerticalP1");
     }
 
     //Left Fist Methods
     void leftFistMovement()
     {
-        if (_leftVertInput < 0) //Prevent from going up        
-            _leftFist.position += new Vector3(_leftHorizInput / 10, _leftVertInput, 0); //Vertical movement       
+        float _speedIncrement = 10 * Time.deltaTime; 
+        if (_leftVertInput < 0) //Prevent from going up   
+        {
+            _speedIncreaseLeft -= _speedIncrement;  //Interesting movementincrease
+            _leftFist.position += new Vector3(0, _leftVertInput + _speedIncreaseLeft, 0); //Vertical movement       
+        }
         else
-            _leftFist.position += new Vector3(_leftHorizInput, 0, 0); //Horizontal movement
-
-        _smashingLeft = false;
+        {
+            _speedIncreaseLeft = 0.5f;
+            _leftFist.position += new Vector3(_leftHorizInput/2, 0, 0); //Horizontal movement
+        }
     }  
     void CheckLeftFistLocation()
     {
@@ -83,6 +97,7 @@ public class FistBehaviour : MonoBehaviour {
         {
             _canSlamLeftFist = false;
             _canMoveLeftFist = false;
+            _shake = true;
         }
             
     }
@@ -105,10 +120,17 @@ public class FistBehaviour : MonoBehaviour {
 
     void RightFistMovement()
     {
+        float _speedIncrement = 10 * Time.deltaTime;
         if (_rightVertInput < 0)
-            _rightFist.position += new Vector3(_rightHorizInput/10, _rightVertInput, 0);
+        {
+            _speedIncreaseRight -= _speedIncrement;  //Interesting movementincrease
+            _rightFist.position += new Vector3(0, _rightVertInput + _speedIncreaseRight, 0);
+        }
         else
+        {
+            _speedIncreaseRight = 0.5f;
             _rightFist.position += new Vector3(_rightHorizInput, 0, 0);
+        }
     }
     void CheckRightFistLocation()
     {
@@ -116,6 +138,7 @@ public class FistBehaviour : MonoBehaviour {
         {
             _canSlamRightFist = false;
             _canMoveRightFist = false;
+            _shake = true;
         }
 
     }
@@ -139,10 +162,12 @@ public class FistBehaviour : MonoBehaviour {
     {
         this.transform.position += new Vector3(_moveSpeed * Time.deltaTime, 0, 0);
     }
-    //Interesting movement
-
-    void FasterGravity()
-    {
-        //to be continued
+   
+    //Shake method
+    void ShakeCamera()
+    {       
+        StartCoroutine(CameraShake.Shake(_shakeDuration, _shakeMagnitude));
+        _shake = false;
+        
     }
 }
