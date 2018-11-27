@@ -22,5 +22,4 @@ public class ShakeBehaviour : MonoBehaviour
         }
         transform.localPosition = originalPos;
     }
-
 }

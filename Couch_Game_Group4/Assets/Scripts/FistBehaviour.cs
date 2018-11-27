@@ -5,7 +5,8 @@ public class FistBehaviour : MonoBehaviour {
     private float  _rightVertInput, _rightHorizInput;
     private float _leftHorizInput,_leftVertInput;
     [SerializeField]
-    private Transform _leftFist,_rightFist,_fistConstraint;
+    private Transform _leftFist, _rightFist;
+    public Transform _fistConstraint;
 
     //Left fist variables
     private bool _canSlamLeftFist;
@@ -28,7 +29,7 @@ public class FistBehaviour : MonoBehaviour {
     private float _speedIncreaseRight = 0.5f;
 
     //Camera variable
-    private bool _shakeLeft,_shakeRight;
+    private bool _shake;
 
     [SerializeField]
     private float _shakeDuration,_shakeMagnitude;
@@ -43,10 +44,8 @@ public class FistBehaviour : MonoBehaviour {
         RightFist();
 
         //ShakeCamera independent of fist
-        if (_shakeLeft)
-            ShakeCameraLeft();
-        if (_shakeRight)
-            ShakeCameraRight();
+        if (_shake)
+            ShakeCamera();
     }
     void LeftFist()
     {
@@ -70,11 +69,11 @@ public class FistBehaviour : MonoBehaviour {
     }
     void HandleInput()
     {
-        _leftHorizInput = Input.GetAxis("Horizontal");           
-        _leftVertInput = Input.GetAxis("Vertical");
+        _leftHorizInput = Input.GetAxis("LeftHorizontalP1");           
+        _leftVertInput = Input.GetAxis("LeftVerticalP1");
       
-        _rightHorizInput = Input.GetAxis("MouseX");
-        _rightVertInput = Input.GetAxis("MouseY");
+        _rightHorizInput = Input.GetAxis("RightHorizontalP1");
+        _rightVertInput = Input.GetAxis("RightVerticalP1");
     }
 
     //Left Fist Methods
@@ -98,7 +97,7 @@ public class FistBehaviour : MonoBehaviour {
         {
             _canSlamLeftFist = false;
             _canMoveLeftFist = false;
-            _shakeLeft = true;
+            _shake = true;
         }
             
     }
@@ -139,7 +138,7 @@ public class FistBehaviour : MonoBehaviour {
         {
             _canSlamRightFist = false;
             _canMoveRightFist = false;
-            _shakeRight = true;
+            _shake = true;
         }
 
     }
@@ -165,15 +164,10 @@ public class FistBehaviour : MonoBehaviour {
     }
    
     //Shake method
-    void ShakeCameraLeft()
+    void ShakeCamera()
     {       
         StartCoroutine(CameraShake.Shake(_shakeDuration, _shakeMagnitude));
-        _shakeLeft = false;
+        _shake = false;
         
-    }
-    void ShakeCameraRight()
-    {
-        StartCoroutine(CameraShake.Shake(_shakeDuration, _shakeMagnitude));
-        _shakeRight = false;
     }
 }

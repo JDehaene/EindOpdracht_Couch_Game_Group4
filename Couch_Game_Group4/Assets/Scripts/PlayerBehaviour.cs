@@ -4,71 +4,75 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    private CharacterController _characterController;
+    //External variables 
+
+    private Rigidbody _rb;
+    //Input variable
     private float _horizontalInput;
 
+    //Player variables
     [SerializeField]
     private int _playerSpeed;
-
-    private Vector3 _velocity;
     [SerializeField]
-    private float _jumpHeight;
-    private bool _jump;
+    private float _jumpHeight,_dashDistance;
+    private bool _jump = false;
+    private bool _dash = false;
+    private bool _isGrounded;
+
+    [SerializeField]
+    private Transform _constraint;
+
 
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         HandleInput();
-        
-        
-    }
-    private void FixedUpdate()
-    {
-       
+        IsGrounded();
         Movement();
         Jump();
-        Gravity();
-        _characterController.Move(_velocity*Time.deltaTime);
-      
+        Dash();       
     }
 
     void HandleInput()
     {
-        _horizontalInput = Input.GetAxis("Player1Horizontal");
-        if (Input.GetButtonDown("Player1Jump"))
-        {
-            _jump = true;
-        }
+        _horizontalInput = Input.GetAxis("HorizontalP2");
     }
-
+    //Move Methods
     void Movement()
     {
-        _velocity = Vector3.right * _playerSpeed * Time.deltaTime;
+        this.transform.position += Vector3.right * _playerSpeed*Time.deltaTime;
     }
-
     void Jump()
     {
-        if(_jump && _characterController.isGrounded)
+        if (Input.GetButtonDown("JumpP2") && _isGrounded)
         {
-            _velocity += -Physics.gravity.normalized * Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
-            _jump = false;
+            _rb.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
         }
+        if(!_isGrounded)
+        {
+            this.transform.position -= Vector3.down*Time.deltaTime;
+        }
+
     }
     void Dash()
     {
-        if(Input.GetButtonDown("Player1Dash"))
+        if (Input.GetButtonDown("DashP2"))
         {
-
+            _rb.AddForce(Vector3.right * _dashDistance, ForceMode.Impulse);
         }
     }
 
-    void Gravity()
+    void IsGrounded()
     {
-        Debug.Log("Active");
-        _velocity += Physics.gravity;
+        if (transform.position.y <= _constraint.position.y*1.5f)
+        {
+            _isGrounded = true;
+        }
+        else
+            _isGrounded = false;
     }
 }
