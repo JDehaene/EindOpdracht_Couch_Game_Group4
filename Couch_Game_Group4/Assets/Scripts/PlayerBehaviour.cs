@@ -33,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
-        layerMask = 1 << 10;
+        layerMask = 1 << 11;
         HandleInput();
         IsGrounded();
         Movement();
