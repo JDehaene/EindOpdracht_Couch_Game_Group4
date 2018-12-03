@@ -38,10 +38,11 @@ GameObject:
   - component: {fileID: 4852727230854664}
   - component: {fileID: 54480547267354272}
   - component: {fileID: 136729259962941472}
+  - component: {fileID: 136754864635724794}
   - component: {fileID: 114581321480150646}
   - component: {fileID: 114756955291308016}
   m_Layer: 0
-  m_Name: Player_1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +90,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e5e52ce72543ef641907882788db63af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 20
-  _jumpHeight: 10
-  _dashDistance: 10
+  _jumpHeight: 15
+  _dashSpeed: 30
   _constraint: {fileID: 0}
 --- !u!114 &114756955291308016
 MonoBehaviour:
@@ -166,6 +167,19 @@ CapsuleCollider:
   m_GameObject: {fileID: 1806528582224366}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 0
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.67, z: 0}
+--- !u!136 &136754864635724794
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1806528582224366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

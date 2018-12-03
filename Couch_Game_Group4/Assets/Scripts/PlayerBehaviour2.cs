@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour2 : MonoBehaviour
 {
     //External variables 
     private Rigidbody _rb;
@@ -43,8 +43,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     void HandleInput()
     {
-        _horizontalInput = Input.GetAxis("HorizontalP2");
-        _verticalInput = Input.GetAxis("VerticalP2");
+        _horizontalInput = Input.GetAxis("HorizontalP4");
+        _verticalInput = Input.GetAxis("VerticalP4");
     }
     //Move Methods
     void Movement()
@@ -53,24 +53,19 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetButtonDown("JumpP2") && _isGrounded)
+
+        if (Input.GetButtonDown("JumpP4") && _isGrounded)
         {
             _rb.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
         }
-        if(!_isGrounded)
+        else
         {
             _rb.useGravity = true;
-            if (_verticalInput > 0)
-            {
-                _rb.velocity = Vector3.zero;
-                transform.position -= new Vector3(0, _fallSpeed * _verticalInput * Time.deltaTime, 0);
-            }
         }
-
     }
     void Dash()
     {
-        if (Input.GetButtonDown("DashP2") && _dash == false)
+        if (Input.GetButtonDown("DashP4") && _dash == false)
         {
             _rb.velocity = Vector3.zero;
             _rb.AddForce(Vector3.right * _dashSpeed *_horizontalInput, ForceMode.Impulse);
