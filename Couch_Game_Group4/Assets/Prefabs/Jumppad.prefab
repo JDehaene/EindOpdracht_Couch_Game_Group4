@@ -21,7 +21,9 @@ GameObject:
   - component: {fileID: 4878271375668868}
   - component: {fileID: 33072912856239672}
   - component: {fileID: 23392622354125644}
-  m_Layer: 0
+  - component: {fileID: 65084733668312920}
+  - component: {fileID: 65711488678458718}
+  m_Layer: 9
   m_Name: Jumppad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109168209941848}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -133.273, y: 0.974, z: 1.2}
   m_LocalScale: {x: 1.2418749, y: 1.2418749, z: 1.2418749}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +85,27 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109168209941848}
   m_Mesh: {fileID: 4300000, guid: 331a3c8804abd704ca294d296ba8b1bc, type: 3}
+--- !u!65 &65084733668312920
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1109168209941848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.65985554, y: 0.6887675, z: 0.04764896}
+  m_Center: {x: -0.010689625, y: 0.0058929953, z: 0.3046389}
+--- !u!65 &65711488678458718
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1109168209941848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.79353476, y: 0.7993632, z: 0.32921177}
+  m_Center: {x: -0.0058496594, y: 0, z: 0.13499911}
