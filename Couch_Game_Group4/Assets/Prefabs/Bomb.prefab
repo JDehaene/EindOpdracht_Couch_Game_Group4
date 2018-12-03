@@ -109,3 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96afa85c173600b4ba172871d280335d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftFist: {fileID: 1926290525269784, guid: 21dde72d632b151439412f10a47d1437, type: 2}
+  _rightFist: {fileID: 1809284302834996, guid: 21dde72d632b151439412f10a47d1437, type: 2}
+  _leftFistHealth: {fileID: 2100000, guid: 7e369330e1d96424e8fc7700cce1c64c, type: 2}
+  _rightFistHealth: {fileID: 2100000, guid: d0e99f8c1418644468cbb65f0971febf, type: 2}
