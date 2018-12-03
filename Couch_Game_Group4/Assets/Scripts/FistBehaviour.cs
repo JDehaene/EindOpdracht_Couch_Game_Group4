@@ -23,8 +23,7 @@ public class FistBehaviour : MonoBehaviour {
     private float _rightFistCooldown;
 
     //Move variables
-    [SerializeField]
-    private float _moveSpeed;
+    public  float _moveSpeed;
     private float _speedIncreaseLeft = 0.5f;
     private float _speedIncreaseRight = 0.5f;
 
