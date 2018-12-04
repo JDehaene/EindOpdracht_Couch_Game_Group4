@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 33918517709615784}
   - component: {fileID: 23233590916653666}
   - component: {fileID: 65932214923946722}
+  - component: {fileID: 114872529648581088}
   m_Layer: 10
   m_Name: Spikes (1)
   m_TagString: Untagged
@@ -483,6 +484,7 @@ GameObject:
   - component: {fileID: 23520390350869082}
   - component: {fileID: 65948957607092660}
   - component: {fileID: 65608778532456744}
+  - component: {fileID: 114312707127454716}
   m_Layer: 9
   m_Name: Jumppad (1)
   m_TagString: Untagged
@@ -658,6 +660,7 @@ GameObject:
   - component: {fileID: 23809430559388874}
   - component: {fileID: 65494423299767008}
   - component: {fileID: 65390103529296496}
+  - component: {fileID: 114780344928100748}
   m_Layer: 9
   m_Name: Jumppad (4)
   m_TagString: Untagged
@@ -695,6 +698,7 @@ GameObject:
   - component: {fileID: 23872136410381540}
   - component: {fileID: 65268695562449794}
   - component: {fileID: 65687159971937864}
+  - component: {fileID: 114056356610509666}
   m_Layer: 9
   m_Name: Jumppad (3)
   m_TagString: Untagged
@@ -3225,6 +3229,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.65985554, y: 0.6887675, z: 0.04764896}
   m_Center: {x: -0.010689625, y: 0.0058929953, z: 0.3046389}
+--- !u!114 &114056356610509666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1857578476111808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de68b6a3b0bd9f74b945959d99187ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPadPower: 0
+  _isFacingUp: 0
+  _isFacingLeft: 0
+  _isFacingRight: 0
+--- !u!114 &114312707127454716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1532297082171326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de68b6a3b0bd9f74b945959d99187ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPadPower: 0
+  _isFacingUp: 0
+  _isFacingLeft: 0
+  _isFacingRight: 0
 --- !u!114 &114322492294336186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3240,3 +3274,29 @@ MonoBehaviour:
   _rightFist: {fileID: 1809284302834996, guid: 21dde72d632b151439412f10a47d1437, type: 2}
   _leftFistHealth: {fileID: 2100000, guid: 7e369330e1d96424e8fc7700cce1c64c, type: 2}
   _rightFistHealth: {fileID: 2100000, guid: d0e99f8c1418644468cbb65f0971febf, type: 2}
+--- !u!114 &114780344928100748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849694693219060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de68b6a3b0bd9f74b945959d99187ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPadPower: 0
+  _isFacingUp: 0
+  _isFacingLeft: 0
+  _isFacingRight: 0
+--- !u!114 &114872529648581088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174508781071300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f28c4bb73bddb49a2700ad4ff2b39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

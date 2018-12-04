@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 23408682351219656}
   - component: {fileID: 65271380780578118}
   - component: {fileID: 65210452373553416}
+  - component: {fileID: 114148424094525170}
   m_Layer: 9
   m_Name: Jumppad (3)
   m_TagString: Untagged
@@ -483,6 +484,7 @@ GameObject:
   - component: {fileID: 23688244100038214}
   - component: {fileID: 65639590598126856}
   - component: {fileID: 65991028191947052}
+  - component: {fileID: 114078498002903434}
   m_Layer: 9
   m_Name: Jumppad (2)
   m_TagString: Untagged
@@ -520,6 +522,7 @@ GameObject:
   - component: {fileID: 23595369674885898}
   - component: {fileID: 65196955398773250}
   - component: {fileID: 65682323267371048}
+  - component: {fileID: 114492625227419290}
   m_Layer: 9
   m_Name: Jumppad (1)
   m_TagString: Untagged
@@ -2990,3 +2993,48 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.79353476, y: 0.7993632, z: 0.32921177}
   m_Center: {x: -0.0058496594, y: 0, z: 0.13499911}
+--- !u!114 &114078498002903434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1709920270945694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de68b6a3b0bd9f74b945959d99187ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPadPower: 5
+  _isFacingUp: 1
+  _isFacingLeft: 0
+  _isFacingRight: 0
+--- !u!114 &114148424094525170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450505975387296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de68b6a3b0bd9f74b945959d99187ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPadPower: 5
+  _isFacingUp: 1
+  _isFacingLeft: 0
+  _isFacingRight: 0
+--- !u!114 &114492625227419290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763186893911686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de68b6a3b0bd9f74b945959d99187ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpPadPower: 5
+  _isFacingUp: 1
+  _isFacingLeft: 0
+  _isFacingRight: 0
