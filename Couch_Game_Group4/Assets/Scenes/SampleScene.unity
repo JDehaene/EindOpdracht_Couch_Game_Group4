@@ -1000,6 +1000,14 @@ Prefab:
       propertyPath: _playerSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1806528582224366, guid: 184133acacb31144e87d6ab818b33166, type: 2}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431934106502346, guid: 184133acacb31144e87d6ab818b33166, type: 2}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114756955291308016, guid: 184133acacb31144e87d6ab818b33166, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 184133acacb31144e87d6ab818b33166, type: 2}
@@ -1125,6 +1133,14 @@ Prefab:
     - target: {fileID: 1806528582224366, guid: 184133acacb31144e87d6ab818b33166, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806528582224366, guid: 184133acacb31144e87d6ab818b33166, type: 2}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431934106502346, guid: 184133acacb31144e87d6ab818b33166, type: 2}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114581321480150646, guid: 184133acacb31144e87d6ab818b33166, type: 2}
@@ -1526,6 +1542,14 @@ Prefab:
     - target: {fileID: 1806528582224366, guid: 184133acacb31144e87d6ab818b33166, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806528582224366, guid: 184133acacb31144e87d6ab818b33166, type: 2}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431934106502346, guid: 184133acacb31144e87d6ab818b33166, type: 2}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114581321480150646, guid: 184133acacb31144e87d6ab818b33166, type: 2}
