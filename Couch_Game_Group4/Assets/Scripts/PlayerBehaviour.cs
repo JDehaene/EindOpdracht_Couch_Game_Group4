@@ -14,16 +14,23 @@ public class PlayerBehaviour : MonoBehaviour
     //Player variables
     [SerializeField]
     private int _playerSpeed;
+    private Vector3 _movement;
     private Vector3 _velocity;
-    [SerializeField]
-    private float _jumpHeight, _dashSpeed;
-    private float _fallSpeed = 20;
-    private float _dashTime;
+
+    
+    private float _jumpHeight = 30;
+    private float _dashSpeed = 15;
+
+    private float _dashTimer;
     private bool _jump = false;
     private bool _dash = false;
     private bool _isGrounded;
     private float _counter;
     private int layerMask;
+    private float _maxRunningSpeed = 0.2f;
+    private float _dashCooldown = 3;
+    private bool _dashAvailable;
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -33,103 +40,90 @@ public class PlayerBehaviour : MonoBehaviour
     {
         layerMask = 1 << 11;
         HandleInput();      
-        Movement();
+       
         
     }
     private void FixedUpdate()
     {
         ApplyGravity();
-        Jump();       
+        if(!_dash)
+        Movement();
+        
+        Jump();
         Dash();
-
+        if(!_dash)
+            LimitMaximumRunningSpeed();
 
         _characterController.Move(_velocity);
     }
 
     void HandleInput()
     {
-        _horizontalInput = Input.GetAxis("HorizontalP2");
-        _verticalInput = Input.GetAxis("VerticalP2");
-
+        _horizontalInput = Input.GetAxis("HorizontalP2");       
         if (Input.GetButtonDown("JumpP2"))
             _jump = true;
+        if (Input.GetButtonDown("DashP2"))
+            _dash = true;
     }
     //Move Methods
     void Movement()
     {
-        
-        _velocity = new Vector3(_horizontalInput,0,0) * _playerSpeed*Time.deltaTime;
+        _velocity += Vector3.right * _playerSpeed * Time.deltaTime;
     }
-    void Jump()     
+    void Jump()
     {
         if (_jump && _characterController.isGrounded)
         {
-            _velocity.y +=  Mathf.Sqrt(2*Physics.gravity.magnitude * _jumpHeight);
+            _velocity.y = 0; //Reset so jump doesnt get dumped
+            
+            _velocity.y += _jumpHeight * Time.deltaTime; //Addjump
             _jump = false;
         }
     }
     void Dash()
     {
-   
+        Debug.Log(_dashAvailable);
+        if (_dash && _dashAvailable == true)
+        {
+            _velocity.x += _dashSpeed * Time.deltaTime;
+            _dashTimer+=Time.deltaTime;
+        }
+        if(_dashTimer >= 0.1f) //Stop the dash
+        {
+            _dashTimer = 0;            
+            _dash = false;
+            _dashAvailable = false; //Start cooldown
+        }
+        if (!_dashAvailable) //Keep track of cooldown
+        {
+            _dashCooldown += Time.deltaTime;
+            Debug.Log(_dashCooldown);
+        }
+        if(_dashCooldown >= 3) //Restrict dashing until cooldown off
+        {
+            _dashAvailable = true;
+            _dashCooldown = 0;
+        }
     }
     void ApplyGravity()
     {
-        _velocity += Physics.gravity*Time.deltaTime;
+        if(!_characterController.isGrounded)
+        _velocity -= new Vector3(0,0.05f,0);
+    }
+    private void LimitMaximumRunningSpeed()
+    {
+        Vector3 yVelocity = Vector3.Scale(_velocity, new Vector3(0, 1, 0));
+
+        Vector3 xzVelocity = Vector3.Scale(_velocity, new Vector3(1, 0, 1));
+        Vector3 clampedXzVelocity = Vector3.ClampMagnitude(xzVelocity, _maxRunningSpeed + _horizontalInput/20); //Make it go faster/slower
+
+        _velocity = yVelocity + clampedXzVelocity;
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Fist")
         Destroy(this.gameObject);
-    }
-    //Debug.Log(_isGrounded);
-    //if (Input.GetButtonDown("JumpP2") && _isGrounded)
-    //{
-    //    _rb.AddForce(Vector3.up* _jumpHeight, ForceMode.Impulse);
-    //}
-    //if(!_isGrounded)
-    //{
-    //    _rb.useGravity = true;
-    //    if (_verticalInput > 0)
-    //    {
-    //        _rb.velocity = Vector3.zero;
-    //        transform.position -= new Vector3(0, _fallSpeed* _verticalInput * Time.deltaTime, 0);
-    //    }
-    //}
-
-    //    if (Input.GetButtonDown("DashP2") && _dash == false)
-    //    {
-    //        _rb.velocity = Vector3.zero;
-    //        _rb.AddForce(Vector3.right * _dashSpeed *_horizontalInput, ForceMode.Impulse);
-    //        _dash = true;
-    //    }
-    //    if(_dash)
-    //    {
-    //        _counter += Time.deltaTime;
-    //    }
-    //    if(_counter > _dashTime)
-    //    {
-    //        _rb.velocity = Vector3.zero;
-    //        _counter = 0;
-    //        _dash = false;            
-    //    }
-    //    if (_horizontalInput < 0)
-    //    {
-    //        _dashTime = 0.1f;
-    //    }
-    //    else
-    //    {        
-    //        _dashTime = 0.2f;
-    //    }
-
-    //Vector3 down = transform.TransformDirection(Vector3.down);
-    //RaycastHit hit;
-
-    //if (Physics.Raycast(transform.position, down, out hit, 4f, layerMask))
-    //{
-    //    _isGrounded = true;
-    //}
-    //else
-    //    _isGrounded = false;
+    }   
 }
 
 
