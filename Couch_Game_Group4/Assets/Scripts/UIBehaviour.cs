@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIBehaviour : MonoBehaviour
-{
-    public FistBehaviour _fist;
+{   
     public int playerID = 1;
     public int controllerID = 1;
     public Text txtInfo;
@@ -22,13 +21,5 @@ public class UIBehaviour : MonoBehaviour
     {
         this.enabled = false;
         txtInfo.text = "Press 'A' to join";
-    }
-
-    public void StartGame()
-    {
-        if (this.enabled)
-        {
-            _fist._moveSpeed = 20;
-        }
     }
 }

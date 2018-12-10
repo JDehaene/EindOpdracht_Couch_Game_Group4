@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour2 : MonoBehaviour
 {
     //External variables 
     private CharacterController _characterController;
@@ -59,10 +59,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     void HandleInput()
     {
-        _horizontalInput = Input.GetAxis("HorizontalP2");       
-        if (Input.GetButtonDown("JumpP2"))
+        _horizontalInput = Input.GetAxis("HorizontalP4");       
+        if (Input.GetButtonDown("JumpP4"))
             _jump = true;
-        if (Input.GetButtonDown("DashP2"))
+        if (Input.GetButtonDown("DashP4"))
             _dash = true;
     }
     //Move Methods
@@ -95,7 +95,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if (!_dashAvailable) //Keep track of cooldown
         {
-            _dashCooldown += Time.deltaTime;          
+            _dashCooldown += Time.deltaTime;
         }
         if(_dashCooldown >= 3) //Restrict dashing until cooldown off
         {
@@ -117,14 +117,10 @@ public class PlayerBehaviour : MonoBehaviour
 
         _velocity = yVelocity + clampedXzVelocity;
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        
-        if(other.gameObject.layer == LayerMask.NameToLayer("Fist"))
-        {
-            Debug.Log("ded");
-            Destroy(gameObject);
-        }               
+        if(other.tag == "Fist")
+        Destroy(this.gameObject);
     }   
 }
 
