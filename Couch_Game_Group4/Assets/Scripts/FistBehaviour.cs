@@ -7,6 +7,7 @@ public class FistBehaviour : MonoBehaviour {
     [SerializeField]
     private Transform _leftFist, _rightFist;
     public Transform _fistConstraint;
+    private PlayerBehaviour player;
 
     //Left fist variables
     private bool _canSlamLeftFist;
@@ -169,4 +170,5 @@ public class FistBehaviour : MonoBehaviour {
         _shake = false;
         
     }
+
 }

@@ -7,6 +7,8 @@ public class PlayerBehaviour : MonoBehaviour
 {
     //External variables 
     private CharacterController _characterController;
+    [SerializeField]
+    private float _controllerID;
     //Input variable
     private float _horizontalInput;
     private float _verticalInput;
@@ -17,8 +19,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 _movement;
     private Vector3 _velocity;
 
-    
-    private float _jumpHeight = 30;
+
+    private float _jumpHeight = 20;
     private float _dashSpeed = 15;
 
     private float _dashTimer;
@@ -30,6 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float _maxRunningSpeed = 0.2f;
     private float _dashCooldown = 3;
     private bool _dashAvailable;
+    private int _playerHealth = 3;
 
     private void Start()
     {
@@ -39,19 +42,18 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         layerMask = 1 << 11;
-        HandleInput();      
-       
-        
+        HandleInput();
+        KillPlayer();
     }
     private void FixedUpdate()
     {
         ApplyGravity();
-        if(!_dash)
-        Movement();
-        
+        if (!_dash)
+            Movement();
+
         Jump();
         Dash();
-        if(!_dash)
+        if (!_dash)
             LimitMaximumRunningSpeed();
 
         _characterController.Move(_velocity);
@@ -59,10 +61,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     void HandleInput()
     {
-        _horizontalInput = Input.GetAxis("HorizontalP2");       
-        if (Input.GetButtonDown("JumpP2"))
+        _horizontalInput = Input.GetAxis("HorizontalP"+ _controllerID);
+        if (Input.GetButtonDown("JumpP" + _controllerID))
             _jump = true;
-        if (Input.GetButtonDown("DashP2"))
+        if (Input.GetButtonDown("DashP" + _controllerID))
             _dash = true;
     }
     //Move Methods
@@ -75,7 +77,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (_jump && _characterController.isGrounded)
         {
             _velocity.y = 0; //Reset so jump doesnt get dumped
-            
+
             _velocity.y += _jumpHeight * Time.deltaTime; //Addjump
             _jump = false;
         }
@@ -85,19 +87,19 @@ public class PlayerBehaviour : MonoBehaviour
         if (_dash && _dashAvailable == true)
         {
             _velocity.x += _dashSpeed * Time.deltaTime;
-            _dashTimer+=Time.deltaTime;
+            _dashTimer += Time.deltaTime;
         }
-        if(_dashTimer >= 0.1f) //Stop the dash
+        if (_dashTimer >= 0.1f) //Stop the dash
         {
-            _dashTimer = 0;            
+            _dashTimer = 0;
             _dash = false;
             _dashAvailable = false; //Start cooldown
         }
         if (!_dashAvailable) //Keep track of cooldown
         {
-            _dashCooldown += Time.deltaTime;          
+            _dashCooldown += Time.deltaTime;
         }
-        if(_dashCooldown >= 3) //Restrict dashing until cooldown off
+        if (_dashCooldown >= 3) //Restrict dashing until cooldown off
         {
             _dashAvailable = true;
             _dashCooldown = 0;
@@ -105,27 +107,31 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void ApplyGravity()
     {
-        if(!_characterController.isGrounded)
-        _velocity -= new Vector3(0,0.05f,0);
+        if (!_characterController.isGrounded)
+            _velocity -= new Vector3(0, 0.02f, 0);
     }
     private void LimitMaximumRunningSpeed()
     {
         Vector3 yVelocity = Vector3.Scale(_velocity, new Vector3(0, 1, 0));
 
         Vector3 xzVelocity = Vector3.Scale(_velocity, new Vector3(1, 0, 1));
-        Vector3 clampedXzVelocity = Vector3.ClampMagnitude(xzVelocity, _maxRunningSpeed + _horizontalInput/20); //Make it go faster/slower
+        Vector3 clampedXzVelocity = Vector3.ClampMagnitude(xzVelocity, _maxRunningSpeed + _horizontalInput / 20); //Make it go faster/slower
 
         _velocity = yVelocity + clampedXzVelocity;
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        
-        if(other.gameObject.layer == LayerMask.NameToLayer("Fist"))
+        if (other.CompareTag("Fist"))
         {
-            Debug.Log("ded");
-            Destroy(gameObject);
-        }               
-    }   
+            _playerHealth--;
+            Debug.Log(_playerHealth);
+        }
+            
+    }
+    void KillPlayer()
+    {
+        if (_playerHealth <= 0)
+            Destroy(this.gameObject);
+    }
 }
-
 

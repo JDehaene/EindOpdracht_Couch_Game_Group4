@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public class CharacterControl : MonoBehaviour {
+public class CharacterInputs : MonoBehaviour {
 
     public UIBehaviour[] Players;
     private List<int> activePlayers = new List<int>();
@@ -12,8 +12,8 @@ public class CharacterControl : MonoBehaviour {
     public GameObject bannerTimer;
     private bool isCounting = false;
     public Text txtCounter;
-    public float maxTime = 30;
-    private float counter = 0;
+    public float maxTime = 10;
+    private float _counter = 0;
 	
 	void Update ()
     {
@@ -27,28 +27,28 @@ public class CharacterControl : MonoBehaviour {
         {
             if( activePlayers.Count < 2)
             {
-                counter = 0;
+                _counter = 0;
                 isCounting = false;
                 bannerTimer.SetActive(false);
                 return;
             }
 
-            counter += Time.deltaTime;
-            txtCounter.text = ""+ (int) (maxTime - counter);
+            _counter += Time.deltaTime;
+            txtCounter.text = ""+ (int) (maxTime - _counter);
 
-            if( counter >= maxTime)
+            if( _counter >= maxTime)
             {
                 this.enabled = false;
                 txtCounter.text = "Start";
                 for (int i = 0; i < Players.Length; ++i)
                 {
-                    //Players[i].StartGame();
+                    Players[i].StartGame();
                 }
             }
         }
         else if( activePlayers.Count > 1)
         {
-            counter = 0;
+            _counter = 0;
             isCounting = true;
             bannerTimer.SetActive(true);
         }
@@ -61,6 +61,7 @@ public class CharacterControl : MonoBehaviour {
         {
             if (!activePlayers.Contains(i) && Input.GetButtonDown("SelectP" + i))
             {
+                Debug.Log("Player" + i + "has joined");
                 activePlayers.Add(i);
                 Players[GetPlayer()].Active(i);
             }
