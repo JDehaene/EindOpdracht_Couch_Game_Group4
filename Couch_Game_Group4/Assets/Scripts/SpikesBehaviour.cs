@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class SpikesBehaviour : MonoBehaviour
 {
-
-    private void OnTriggerEnter(Collider t)
+    private PlayerBehaviour _player;
+    
+    private void OnTriggerEnter(Collider other)
     {
-        if (t.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Fell into the spikes!");
-            Destroy(t);
-
+            _player.HurtPlayer();
         }
     }
-
 }

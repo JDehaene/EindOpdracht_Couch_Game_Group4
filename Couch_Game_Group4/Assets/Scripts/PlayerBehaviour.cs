@@ -32,7 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float _maxRunningSpeed = 0.2f;
     private float _dashCooldown = 3;
     private bool _dashAvailable;
-    private int _playerHealth = 3;
+    public int _playerHealth = 3;
 
     private void Start()
     {
@@ -59,7 +59,7 @@ public class PlayerBehaviour : MonoBehaviour
         _characterController.Move(_velocity);
     }
 
-    void HandleInput()
+    private void HandleInput()
     {
         _horizontalInput = Input.GetAxis("HorizontalP"+ _controllerID);
         if (Input.GetButtonDown("JumpP" + _controllerID))
@@ -68,24 +68,26 @@ public class PlayerBehaviour : MonoBehaviour
             _dash = true;
     }
     //Move Methods
-    void Movement()
+    private void Movement()
     {
         _velocity += Vector3.right * _playerSpeed * Time.deltaTime;
     }
-    void Jump()
+    private void Jump()
     {
         if (_jump && _characterController.isGrounded)
         {
+            Debug.Log("Jump works");
             _velocity.y = 0; //Reset so jump doesnt get dumped
 
             _velocity.y += _jumpHeight * Time.deltaTime; //Addjump
             _jump = false;
         }
     }
-    void Dash()
+    private void Dash()
     {
         if (_dash && _dashAvailable == true)
         {
+            Debug.Log("Dash works");
             _velocity.x += _dashSpeed * Time.deltaTime;
             _dashTimer += Time.deltaTime;
         }
@@ -99,13 +101,13 @@ public class PlayerBehaviour : MonoBehaviour
         {
             _dashCooldown += Time.deltaTime;
         }
-        if (_dashCooldown >= 3) //Restrict dashing until cooldown off
+        if (_dashCooldown >= 2) //Restrict dashing until cooldown off
         {
             _dashAvailable = true;
             _dashCooldown = 0;
         }
     }
-    void ApplyGravity()
+    private void ApplyGravity()
     {
         if (!_characterController.isGrounded)
             _velocity -= new Vector3(0, 0.02f, 0);
@@ -114,8 +116,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Vector3 yVelocity = Vector3.Scale(_velocity, new Vector3(0, 1, 0));
 
-        Vector3 xzVelocity = Vector3.Scale(_velocity, new Vector3(1, 0, 1));
-        Vector3 clampedXzVelocity = Vector3.ClampMagnitude(xzVelocity, _maxRunningSpeed + _horizontalInput / 20); //Make it go faster/slower
+        Vector3 xzVelocity = Vector3.Scale(_velocity, new Vector3(1, 0, 0));
+        Vector3 clampedXzVelocity = Vector3.ClampMagnitude(xzVelocity, _maxRunningSpeed + _horizontalInput/10); //Make it go faster/slower
 
         _velocity = yVelocity + clampedXzVelocity;
     }
@@ -123,12 +125,15 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Fist"))
         {
-            _playerHealth--;
-            Debug.Log(_playerHealth);
+            HurtPlayer();
         }
             
     }
-    void KillPlayer()
+    public void HurtPlayer()
+    {
+        _playerHealth--;
+    }
+    private void KillPlayer()
     {
         if (_playerHealth <= 0)
             Destroy(this.gameObject);

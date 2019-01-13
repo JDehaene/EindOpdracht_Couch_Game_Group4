@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4369233506932622}
   - component: {fileID: 33241331995056640}
   - component: {fileID: 23216597860704804}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,14 +36,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4852727230854664}
-  - component: {fileID: 54480547267354272}
-  - component: {fileID: 136729259962941472}
-  - component: {fileID: 136754864635724794}
+  - component: {fileID: 143520087742513096}
   - component: {fileID: 114581321480150646}
-  - component: {fileID: 114756955291308016}
-  m_Layer: 0
-  m_Name: Player_1
-  m_TagString: Untagged
+  - component: {fileID: 65120001560528202}
+  - component: {fileID: 114867992412848454}
+  m_Layer: 12
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1431934106502346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4852727230854664}
@@ -68,8 +67,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806528582224366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.3, y: 7.51, z: 8.16}
-  m_LocalScale: {x: 2.6314528, y: 2.7493582, z: 2.676342}
+  m_LocalPosition: {x: -20.55, y: 3, z: 8.16}
+  m_LocalScale: {x: 0.82235533, y: 0.85920197, z: 0.8363837}
   m_Children:
   - {fileID: 4369233506932622}
   m_Father: {fileID: 0}
@@ -117,21 +116,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1431934106502346}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54480547267354272
-Rigidbody:
+--- !u!65 &65120001560528202
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806528582224366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
+  m_Size: {x: 0.81, y: 0.08, z: 0.99999994}
+  m_Center: {x: 0, y: 1.03, z: 0}
 --- !u!114 &114581321480150646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,11 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec0035b1f298844ba4aadaf6bc7a827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpeed: 20
-  _jumpHeight: 15
-  _dashSpeed: 30
-  _constraint: {fileID: 0}
---- !u!114 &114756955291308016
+  _controllerID: 2
+  _playerSpeed: 1
+  PlayerHealth: 3
+--- !u!114 &114867992412848454
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,12 +150,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1806528582224366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52baf4c2739caa8499d483a89f180a4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 799b2769232af0d40a58d0e536a2e359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoundsOffset: 0.05
---- !u!136 &136729259962941472
-CapsuleCollider:
+  playerID: 1
+  controllerID: 1
+  txtInfo: {fileID: 0}
+  Start: 0
+--- !u!143 &143520087742513096
+CharacterController:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -168,20 +166,11 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 0
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.67, z: 0}
---- !u!136 &136754864635724794
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1806528582224366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
+  serializedVersion: 2
   m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
