@@ -14,5 +14,7 @@ public class TimerBehaviour : MonoBehaviour {
             _countDown -= 1*Time.deltaTime;
 
         TxtInfo.text = "Time until players escape Pygmi :" + (int)_countDown;
+
+
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PlayerBehaviour : MonoBehaviour
@@ -34,20 +35,10 @@ public class PlayerBehaviour : MonoBehaviour
     private float _dashCooldown = 3;
     private bool _dashAvailable;
     public int _playerHealth = 3;
-
-    //Bomb variables
-    [SerializeField]
-    private GameObject BombModel;
-    private bool _throw;
-    private bool _thrown;
-    private BombBehaviour _bomb;
     private bool _restart;
+    private Text playerHealth;
 
-    public Transform ModelAnchor;
-    public int _bombCount;
 
-    public Transform BossHead;
-    private GameObject Bomb;
 
     private void Start()
     {
@@ -59,9 +50,10 @@ public class PlayerBehaviour : MonoBehaviour
         layerMask = 1 << 11;
         HandleInput();
         KillPlayer();
-        ThrowBomb();
         Restart();
-        BombChase();
+
+        playerHealth.text = ""+_playerHealth;
+       
     }
     private void FixedUpdate()
     {
@@ -84,8 +76,6 @@ public class PlayerBehaviour : MonoBehaviour
             _jump = true;
         if (Input.GetButtonDown("DashP" + _controllerID))
             _dash = true;
-        if (Input.GetButtonDown("ThrowP" + _controllerID))
-            _throw = true;
         if (Input.GetButtonDown("RestartP" + _controllerID))
             _restart = true;
     }
@@ -149,10 +139,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             HurtPlayer();
         }
-        if(other.CompareTag("Bomb"))
-        {
-            _bombCount++;
-        }
     }
     public void HurtPlayer()
     {
@@ -163,31 +149,13 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (_playerHealth <= 0)
             Destroy(this.gameObject);
-    }
-    private void ThrowBomb()
-    {
-        if(_throw && _bombCount >= 0)
-        {
-            Debug.Log(_bombCount);
-            _bombCount--;
-            Bomb = Instantiate(BombModel, ModelAnchor, false);
-            _throw = false;
-            _thrown = true;
-        }
-    }
+    }   
     private void Restart()
     {
         if(_restart)
            SceneManager.LoadScene("Couch_game");
     }
 
-    private void BombChase()
-    {
-        if (_thrown)
-        {
-            Bomb.transform.position = Vector3.MoveTowards(this.transform.position, BossHead.position, 3 * Time.deltaTime);
-        }
-    }
 
 }
 
