@@ -4,41 +4,27 @@ using UnityEngine;
 
 public class BombBehaviour : MonoBehaviour {
 
-    private float _fistHealth;
-
     private bool _bombTriggered;
+    private PlayerBehaviour BombPickup;
 
-    void Start()
-    {
-
-    }
     private void Update()
     {
-        BombDamage();
+        BombTrigger();
     }
 
-    void BombDamage()
+    void BombTrigger()
     {
         if(_bombTriggered)
-        {
-            _fistHealth--;
-            Destroy(this.gameObject);
-            _bombTriggered = false;
-            
-        }
-    }
-    void StartPhase2()
-    {
-        if(_fistHealth <= 0)
-        {
-
+        {         
+            Destroy(this.gameObject);            
+            _bombTriggered = false;           
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             _bombTriggered = true;
+        }
     }
-
-
 }

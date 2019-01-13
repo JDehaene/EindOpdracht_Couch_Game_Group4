@@ -37,7 +37,7 @@ public class FistBehaviour : MonoBehaviour {
 
 
     private bool _slammingLeft,_slammingRight;
-   
+    private int _bossHealth = 5;
 
     void Update ()
     {
@@ -177,8 +177,16 @@ public class FistBehaviour : MonoBehaviour {
     void ShakeCamera()
     {       
         StartCoroutine(CameraShake.Shake(_shakeDuration, _shakeMagnitude));
-        _shake = false;
-        
+        _shake = false;       
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bomb"))
+        {
+            _bossHealth--;
+            Destroy(other.gameObject);
+        }
     }
 
 }

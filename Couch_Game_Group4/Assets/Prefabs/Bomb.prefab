@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 23312608161738802}
   - component: {fileID: 65806417169908600}
   - component: {fileID: 114705409872972038}
+  - component: {fileID: 54233315505996732}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,6 +87,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817849156565132}
   m_Mesh: {fileID: 4300000, guid: d58731ce26c544f4b8f6d2213385fedc, type: 3}
+--- !u!54 &54233315505996732
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817849156565132}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65806417169908600
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -109,7 +125,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96afa85c173600b4ba172871d280335d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftFist: {fileID: 1926290525269784, guid: 21dde72d632b151439412f10a47d1437, type: 2}
-  _rightFist: {fileID: 1809284302834996, guid: 21dde72d632b151439412f10a47d1437, type: 2}
-  _leftFistHealth: {fileID: 2100000, guid: 7e369330e1d96424e8fc7700cce1c64c, type: 2}
-  _rightFistHealth: {fileID: 2100000, guid: d0e99f8c1418644468cbb65f0971febf, type: 2}
